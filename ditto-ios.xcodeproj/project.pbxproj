@@ -15,6 +15,7 @@
 		D7C5DD282B771708009178A1 /* ditto_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD272B771708009178A1 /* ditto_iosUITests.swift */; };
 		D7C5DD2A2B771708009178A1 /* ditto_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD292B771708009178A1 /* ditto_iosUITestsLaunchTests.swift */; };
 		D7C5DD372B771744009178A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD362B771744009178A1 /* MainView.swift */; };
+		D7C5DD3A2B771C02009178A1 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD392B771C02009178A1 /* KeyChain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		D7C5DD272B771708009178A1 /* ditto_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ditto_iosUITests.swift; sourceTree = "<group>"; };
 		D7C5DD292B771708009178A1 /* ditto_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ditto_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D7C5DD362B771744009178A1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D7C5DD392B771C02009178A1 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				D7C5DD112B771708009178A1 /* ditto_ios.entitlements */,
 				D7C5DD122B771708009178A1 /* Preview Content */,
 				D7C5DD362B771744009178A1 /* MainView.swift */,
+				D7C5DD392B771C02009178A1 /* KeyChain.swift */,
 			);
 			path = "ditto-ios";
 			sourceTree = "<group>";
@@ -220,6 +223,8 @@
 				Base,
 			);
 			mainGroup = D7C5DCFF2B771707009178A1;
+			packageReferences = (
+			);
 			productRefGroup = D7C5DD092B771707009178A1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -263,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7C5DD0E2B771707009178A1 /* LoginView.swift in Sources */,
+				D7C5DD3A2B771C02009178A1 /* KeyChain.swift in Sources */,
 				D7C5DD372B771744009178A1 /* MainView.swift in Sources */,
 				D7C5DD0C2B771707009178A1 /* ditto_iosApp.swift in Sources */,
 			);

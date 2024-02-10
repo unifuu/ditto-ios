@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
+//    let authToken: String? = KeyChain.load(key: "auth_token")
+    
+    let authToken = UserDefaults.standard.string(forKey: "auth_token")
+    
     var body: some View {
-        Text("Main Screen")
+        Text(authToken ?? "")
             .padding()
             .navigationTitle("Main Screen")
     }

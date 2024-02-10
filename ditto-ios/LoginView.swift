@@ -88,6 +88,8 @@ struct LoginView: View {
                 } else {
                     isLoggedIn = true
                     authToken = response.auth_token
+                    
+                    UserDefaults.standard.set(authToken, forKey: "auth_token")
                 }
             } else {
                 print("Failed to decode response JSON")
