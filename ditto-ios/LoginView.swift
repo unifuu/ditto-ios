@@ -8,16 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("authToken") private var authToken: String?
     
-    @State private var isLoggedIn = false
-    @State private var authToken: String?
+//    @State private var isLoggedIn = false
+//    @State private var authToken: String?
     
     var body: some View {
-        if isLoggedIn {
+        if let authToken = authToken, !authToken.isEmpty {
             MainView()
         } else {
-            LoginView(isLoggedIn: $isLoggedIn, authToken: $authToken)
+            
         }
+            
+//        if isLoggedIn {
+//            MainView()
+//        } else {
+//            LoginView(isLoggedIn: $isLoggedIn, authToken: $authToken)
+//        }
     }
 }
 
@@ -53,26 +60,21 @@ struct LoginView: View {
     }
     
     func login() {
-        // Construct URL
-        guard let url = URL(string: "https://unifuu.com/api/user/login") else {
-            print("Invalid URL")
-            return
-        }
+        guard let url = URL(string: "https://unifuu.com/api/user/login"
+        ) else { return }
         
-        // Construct URLRequest
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        var req = URLRequest(url: url)
+        req.httpMethod = "POST"
         
-        // Set request body
         let parameters = ["username": username, "password": password]
         guard let requestBody = try? JSONSerialization.data(withJSONObject: parameters) else {
             print("Failed to serialize request body")
             return
         }
-        request.httpBody = requestBody
+        req.httpBody = requestBody
         
         // Perform network request
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: req) { data, response, error in
             // Handle response
             guard let data = data else {
                 print("No data in response: \(error?.localizedDescription ?? "Unknown error")")
@@ -80,7 +82,7 @@ struct LoginView: View {
             }
             
             // Decode response JSON
-            if let response = try? JSONDecoder().decode(LoginResponse.self, from: data) {
+            if let response = try? JSONDecoder().decode(AuthData.self, from: data) {
                 // Handle login response
                 if response.auth_token.isEmpty {
                     isLoggedIn = false
@@ -96,11 +98,6 @@ struct LoginView: View {
             }
         }.resume()
     }
-}
-
-struct LoginResponse: Decodable {
-    let msg: String
-    let auth_token: String
 }
 
 #Preview {

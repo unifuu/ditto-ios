@@ -16,6 +16,15 @@ struct MainView: View {
         Text(authToken ?? "")
             .padding()
             .navigationTitle("Main Screen")
+        
+        NavigationView {
+            List {
+                NavigationLink(destination: BookView()) {
+                    Text("Book Page")
+                }
+            }
+            .navigationTitle("Books")
+        }
     }
 }
 
