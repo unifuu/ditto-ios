@@ -64,3 +64,7 @@ struct AuthData: Codable {
     let msg: String
     let auth_token: String
 }
+
+struct Message: Codable {
+    let msg: String
+}

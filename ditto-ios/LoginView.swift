@@ -9,30 +9,71 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("authToken") private var authToken: String?
-    
-//    @State private var isLoggedIn = false
-//    @State private var authToken: String?
+    @State private var isAuth = false
     
     var body: some View {
-        if let authToken = authToken, !authToken.isEmpty {
+        if isAuth {
             MainView()
         } else {
-            
+            LoginView()
+            .onAppear {
+                if let authToken = authToken, !authToken.isEmpty {
+                    checkToken(token: authToken, isAuth: $isAuth)
+                }
+            }
         }
-            
-//        if isLoggedIn {
-//            MainView()
-//        } else {
-//            LoginView(isLoggedIn: $isLoggedIn, authToken: $authToken)
-//        }
+        
     }
 }
 
+func checkToken(
+    token: String,
+    isAuth: Binding<Bool>
+) {
+    guard let url = URL(string: "https://unifuu.com/api/user/checkAuth"
+    ) else { return }
+    
+    var req = URLRequest(url: url)
+    req.httpMethod = "POST"
+    
+    let parameters = ["auth_token": token]
+    guard let reqBody = try? JSONSerialization.data(withJSONObject: parameters) else {
+        print("Failed to serialize request body")
+        return
+    }
+    req.httpBody = reqBody
+    
+    // Perform network request
+    URLSession.shared.dataTask(with: req) { data, response, error in
+        // Handle response
+        guard let data = data else {
+            print("No data in response: \(error?.localizedDescription ?? "Unknown error")")
+            return
+        }
+        
+        // Decode response JSON
+        if let resp = try? JSONDecoder().decode(Message.self, from: data) {
+            // Handle login response
+            if resp.msg.isEmpty {
+                isAuth.wrappedValue = false
+            } else {
+                let msg = resp.msg
+                if msg == "ok" {
+                    isAuth.wrappedValue = true
+                } else {
+                    isAuth.wrappedValue = false
+                }
+            }
+        } else {
+            print("Failed to decode response JSON")
+        }
+    }.resume()
+}
+
 struct LoginView: View {
-    @Binding var isLoggedIn: Bool
-    @Binding var authToken: String?
     @State private var username = ""
     @State private var password = ""
+    @State private var showAlert = false
     
     var body: some View {
         VStack {
@@ -54,6 +95,9 @@ struct LoginView: View {
             .padding()
             
             Spacer()
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("NG"), message: Text("Failed to login!"), dismissButton: .default(Text("OK")))
         }
         .padding()
         .navigationTitle("Login")
@@ -85,12 +129,9 @@ struct LoginView: View {
             if let response = try? JSONDecoder().decode(AuthData.self, from: data) {
                 // Handle login response
                 if response.auth_token.isEmpty {
-                    isLoggedIn = false
-                    authToken = nil
+                    self.showAlert = true
                 } else {
-                    isLoggedIn = true
-                    authToken = response.auth_token
-                    
+                    let authToken = response.auth_token
                     UserDefaults.standard.set(authToken, forKey: "auth_token")
                 }
             } else {
