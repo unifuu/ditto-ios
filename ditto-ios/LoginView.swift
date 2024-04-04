@@ -8,21 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("authToken") private var authToken: String?
+    @AppStorage("auth_token") private var authToken: String?
     @State private var isAuth = false
     
     var body: some View {
-        if isAuth {
-            MainView()
-        } else {
-            LoginView()
-            .onAppear {
-                if let authToken = authToken, !authToken.isEmpty {
-                    checkToken(token: authToken, isAuth: $isAuth)
-                }
+        NavigationView {
+            if isAuth {
+                MainView()
+            } else {
+                LoginView()
+                    .onAppear {
+                        if let authToken = authToken, !authToken.isEmpty {
+                            checkToken(token: authToken, isAuth: $isAuth)
+                        }
+                    }
             }
         }
-        
     }
 }
 
@@ -30,7 +31,7 @@ func checkToken(
     token: String,
     isAuth: Binding<Bool>
 ) {
-    guard let url = URL(string: "https://unifuu.com/api/user/checkAuth"
+    guard let url = URL(string: "http://localhost/api/user/checkToken"
     ) else { return }
     
     var req = URLRequest(url: url)
@@ -52,18 +53,19 @@ func checkToken(
         }
         
         // Decode response JSON
-        if let resp = try? JSONDecoder().decode(Message.self, from: data) {
+        if let resp = try? JSONDecoder().decode(AuthResp.self, from: data) {
             // Handle login response
-            if resp.msg.isEmpty {
-                isAuth.wrappedValue = false
-            } else {
-                let msg = resp.msg
-                if msg == "ok" {
-                    isAuth.wrappedValue = true
-                } else {
-                    isAuth.wrappedValue = false
-                }
-            }
+            //            if resp.is_auth.isEmpty {
+            //                isAuth.wrappedValue = false
+            //            } else {
+            //                let msg = resp.msg
+            //                if msg == "ok" {
+            //                    isAuth.wrappedValue = true
+            //                } else {
+            //                    isAuth.wrappedValue = false
+            //                }
+            //            }
+            isAuth.wrappedValue = resp.is_auth
         } else {
             print("Failed to decode response JSON")
         }
@@ -78,6 +80,13 @@ struct LoginView: View {
     var body: some View {
         VStack {
             TextField("Username", text: $username)
+                .onChange(of: username) { newValue in
+                    if let firstCharacter = newValue.first {
+                        if firstCharacter.isUppercase {
+                            username = String(firstCharacter).lowercased() + String(newValue.dropFirst())
+                        }
+                    }
+                }
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
@@ -104,7 +113,7 @@ struct LoginView: View {
     }
     
     func login() {
-        guard let url = URL(string: "https://unifuu.com/api/user/login"
+        guard let url = URL(string: "http://localhost/api/user/checkAuth"
         ) else { return }
         
         var req = URLRequest(url: url)
@@ -126,7 +135,7 @@ struct LoginView: View {
             }
             
             // Decode response JSON
-            if let response = try? JSONDecoder().decode(AuthData.self, from: data) {
+            if let response = try? JSONDecoder().decode(AuthResp.self, from: data) {
                 // Handle login response
                 if response.auth_token.isEmpty {
                     self.showAlert = true

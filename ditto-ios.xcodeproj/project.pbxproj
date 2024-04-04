@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D7217BBB2B99565500D1C3A0 /* ActView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7217BBA2B99565500D1C3A0 /* ActView.swift */; };
-		D76D70662B7A33B80069A6B3 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76D70652B7A33B80069A6B3 /* BookView.swift */; };
 		D76D706B2B7D27470069A6B3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76D706A2B7D27470069A6B3 /* Data.swift */; };
 		D7C5DD0C2B771707009178A1 /* ditto_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD0B2B771707009178A1 /* ditto_iosApp.swift */; };
 		D7C5DD0E2B771707009178A1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD0D2B771707009178A1 /* LoginView.swift */; };
@@ -19,6 +18,7 @@
 		D7C5DD2A2B771708009178A1 /* ditto_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD292B771708009178A1 /* ditto_iosUITestsLaunchTests.swift */; };
 		D7C5DD372B771744009178A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD362B771744009178A1 /* MainView.swift */; };
 		D7C5DD3A2B771C02009178A1 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD392B771C02009178A1 /* KeyChain.swift */; };
+		D7D62A542BB6E63500D654A3 /* MarkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D62A532BB6E63500D654A3 /* MarkingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +40,6 @@
 
 /* Begin PBXFileReference section */
 		D7217BBA2B99565500D1C3A0 /* ActView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActView.swift; sourceTree = "<group>"; };
-		D76D70652B7A33B80069A6B3 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		D76D706A2B7D27470069A6B3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D7C5DD082B771707009178A1 /* ditto-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ditto-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7C5DD0B2B771707009178A1 /* ditto_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ditto_iosApp.swift; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		D7C5DD292B771708009178A1 /* ditto_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ditto_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D7C5DD362B771744009178A1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D7C5DD392B771C02009178A1 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		D7D62A532BB6E63500D654A3 /* MarkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,14 +115,14 @@
 			children = (
 				D76D70672B7A381C0069A6B3 /* Data */,
 				D7C5DD0B2B771707009178A1 /* ditto_iosApp.swift */,
+				D7217BBA2B99565500D1C3A0 /* ActView.swift */,
 				D7C5DD0D2B771707009178A1 /* LoginView.swift */,
 				D7C5DD362B771744009178A1 /* MainView.swift */,
-				D76D70652B7A33B80069A6B3 /* BookView.swift */,
+				D7D62A532BB6E63500D654A3 /* MarkingView.swift */,
 				D7C5DD0F2B771708009178A1 /* Assets.xcassets */,
 				D7C5DD112B771708009178A1 /* ditto_ios.entitlements */,
 				D7C5DD122B771708009178A1 /* Preview Content */,
 				D7C5DD392B771C02009178A1 /* KeyChain.swift */,
-				D7217BBA2B99565500D1C3A0 /* ActView.swift */,
 			);
 			path = "ditto-ios";
 			sourceTree = "<group>";
@@ -284,13 +284,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7D62A542BB6E63500D654A3 /* MarkingView.swift in Sources */,
 				D76D706B2B7D27470069A6B3 /* Data.swift in Sources */,
 				D7C5DD0E2B771707009178A1 /* LoginView.swift in Sources */,
 				D7C5DD3A2B771C02009178A1 /* KeyChain.swift in Sources */,
 				D7C5DD372B771744009178A1 /* MainView.swift in Sources */,
 				D7C5DD0C2B771707009178A1 /* ditto_iosApp.swift in Sources */,
 				D7217BBB2B99565500D1C3A0 /* ActView.swift in Sources */,
-				D76D70662B7A33B80069A6B3 /* BookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

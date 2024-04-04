@@ -60,11 +60,20 @@ struct BooksResp: Codable {
     let books: [Book]
 }
 
-struct AuthData: Codable {
-    let msg: String
+struct AuthResp: Codable {
+    let is_auth: Bool
     let auth_token: String
 }
 
-struct Message: Codable {
-    let msg: String
+struct Marking: Codable {
+    let id: String
+    let title: String
+    let by: String
+    let type: String
+    let year: String
+    let current: Int
+    let total: Int
+    let Status: String
+    let progress: String
+    let percentage: String
 }
