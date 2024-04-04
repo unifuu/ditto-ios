@@ -7,25 +7,8 @@
 
 import SwiftUI
 
-struct MainView: View {
-    //    let authToken: String? = KeyChain.load(key: "auth_token")
-    
+struct MainView: View {    
     let authToken = UserDefaults.standard.string(forKey: "auth_token")
-    
-    //    var body: some View {
-    //        Text(authToken ?? "")
-    //            .padding()
-    //            .navigationTitle("Main Screen")
-    //
-    //        NavigationView {
-    //            List {
-    //                NavigationLink(destination: BookView()) {
-    //                    Text("Book Page")
-    //                }
-    //            }
-    //            .navigationTitle("Books")
-    //        }
-    //    }
     
     let menuItems = ["Activities", "Gaming", "Marking"]
     
@@ -42,34 +25,14 @@ struct MainView: View {
         }
     }
     
-//    struct DetailView: View {
-//        let menuItem: String
-//        
-//        var body: some View {
-//            Text("Selected Menu Item: \(menuItem)")
-//                .navigationBarTitle(menuItem)
-//        }
-//    }
-//    
-//    VStack {
-//                ForEach(menus, id: \.self) { menu in
-//                    NavigationLink(destination: self.destinationView(for: menu)) {
-//                        Text(menu)
-//                    }
-//                }
-//            }
-
-
-func destinationView(menu: String) -> some View {
-    switch menu {
-    case "Marking":
-        return AnyView(MarkingView())
-    default:
-        return AnyView(EmptyView())
+    func destinationView(menu: String) -> some View {
+        switch menu {
+        case "Marking":
+            return AnyView(MarkingView())
+        default:
+            return AnyView(EmptyView())
+        }
     }
-}
-    
-    
 }
 
 

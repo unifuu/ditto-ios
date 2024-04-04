@@ -8,25 +8,55 @@
 import SwiftUI
 
 struct MarkingView: View {
-    let markings = ["AAA", "BBB", "CCC"]
+    //    @ObservedObject var apiService = APIService()
+    //
+    //    var body: some View {
+    //        List {
+    //            ForEach(apiService.markings, id: \.self) { item in
+    //                Text(item.title)
+    //            }
+    //        }
+    //        .onAppear {
+    //            self.apiService.fetchData()
+    //        }
+    //    }
+    
+    @ObservedObject var apiService = APIService()
     
     var body: some View {
-        List {
-            ForEach(markings, id: \.self) { item in
-                NavigationLink(destination: DetailView(item: item)) {
-                    Text(item)
-                }
+        List(apiService.markings) { marking in
+            VStack(alignment: .leading) {
+                Text(marking.title)
+                Text("By: \(marking.by)")
+                // Add other properties as needed
             }
         }
-    }
-    
-    struct DetailView: View {
-        let item: String
-        
-        var body: some View {
-            Text("Selected Item: \(item)")
-                .navigationBarTitle(item)
+        .onAppear {
+            self.apiService.fetchData()
         }
+    }
+}
+
+class APIService: ObservableObject {
+    @Published var markings: [Marking] = []
+    
+    func fetchData() {
+        guard let url = URL(string: "https://unifuu.com/api/marking") else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    let decodedData = try JSONDecoder().decode(MarkingResp.self, from: data)
+                    DispatchQueue.main.async {
+                        self.markings = decodedData.markings
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }
+        }.resume()
     }
 }
 

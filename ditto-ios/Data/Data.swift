@@ -65,15 +65,21 @@ struct AuthResp: Codable {
     let auth_token: String
 }
 
-struct Marking: Codable {
+struct Marking: Codable, Identifiable {
     let id: String
     let title: String
-    let by: String
     let type: String
+    let by: String
     let year: String
     let current: Int
     let total: Int
-    let Status: String
+    let price: Int
+    let status: String
     let progress: String
     let percentage: String
+}
+
+struct MarkingResp: Codable {
+    let markings: [Marking]
+    let total_page: Int
 }
