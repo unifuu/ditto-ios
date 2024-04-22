@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D709E9E42BD5DC5800ED4F63 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D709E9E32BD5DC5800ED4F63 /* Constant.swift */; };
+		D709E9E72BD5DCB700ED4F63 /* FormatUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D709E9E62BD5DCB700ED4F63 /* FormatUtil.swift */; };
 		D7217BBB2B99565500D1C3A0 /* ActView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7217BBA2B99565500D1C3A0 /* ActView.swift */; };
 		D76D706B2B7D27470069A6B3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76D706A2B7D27470069A6B3 /* Data.swift */; };
 		D7C5DD0C2B771707009178A1 /* ditto_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5DD0B2B771707009178A1 /* ditto_iosApp.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D709E9E32BD5DC5800ED4F63 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		D709E9E62BD5DCB700ED4F63 /* FormatUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatUtil.swift; sourceTree = "<group>"; };
 		D7217BBA2B99565500D1C3A0 /* ActView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActView.swift; sourceTree = "<group>"; };
 		D76D706A2B7D27470069A6B3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D7C5DD082B771707009178A1 /* ditto-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ditto-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D709E9E52BD5DC9F00ED4F63 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				D709E9E62BD5DCB700ED4F63 /* FormatUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		D76D70672B7A381C0069A6B3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +125,7 @@
 		D7C5DD0A2B771707009178A1 /* ditto-ios */ = {
 			isa = PBXGroup;
 			children = (
+				D709E9E52BD5DC9F00ED4F63 /* Util */,
 				D76D70672B7A381C0069A6B3 /* Data */,
 				D7C5DD0B2B771707009178A1 /* ditto_iosApp.swift */,
 				D7217BBA2B99565500D1C3A0 /* ActView.swift */,
@@ -123,6 +136,7 @@
 				D7C5DD112B771708009178A1 /* ditto_ios.entitlements */,
 				D7C5DD122B771708009178A1 /* Preview Content */,
 				D7C5DD392B771C02009178A1 /* KeyChain.swift */,
+				D709E9E32BD5DC5800ED4F63 /* Constant.swift */,
 			);
 			path = "ditto-ios";
 			sourceTree = "<group>";
@@ -287,9 +301,11 @@
 				D7D62A542BB6E63500D654A3 /* MarkingView.swift in Sources */,
 				D76D706B2B7D27470069A6B3 /* Data.swift in Sources */,
 				D7C5DD0E2B771707009178A1 /* LoginView.swift in Sources */,
+				D709E9E42BD5DC5800ED4F63 /* Constant.swift in Sources */,
 				D7C5DD3A2B771C02009178A1 /* KeyChain.swift in Sources */,
 				D7C5DD372B771744009178A1 /* MainView.swift in Sources */,
 				D7C5DD0C2B771707009178A1 /* ditto_iosApp.swift in Sources */,
+				D709E9E72BD5DCB700ED4F63 /* FormatUtil.swift in Sources */,
 				D7217BBB2B99565500D1C3A0 /* ActView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

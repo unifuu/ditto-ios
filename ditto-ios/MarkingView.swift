@@ -8,19 +8,15 @@
 import SwiftUI
 
 struct MarkingView: View {
-    //    @ObservedObject var apiService = APIService()
-    //
-    //    var body: some View {
-    //        List {
-    //            ForEach(apiService.markings, id: \.self) { item in
-    //                Text(item.title)
-    //            }
-    //        }
-    //        .onAppear {
-    //            self.apiService.fetchData()
-    //        }
-    //    }
+    @State private var status = "Doing"
     
+    var body: some View {
+        StatusTabs()
+    }
+}
+
+struct MarkingList: View {
+    @Binding var status: String
     @ObservedObject var apiService = APIService()
     
     var body: some View {
@@ -32,16 +28,84 @@ struct MarkingView: View {
             }
         }
         .onAppear {
-            self.apiService.fetchData()
+            self.apiService.fetchData(withStatus: status)
         }
     }
 }
 
+struct StatusTabs: View {
+    var body: some View {
+        TabView {
+            MarkingList(status: .constant("Done"))
+                .tabItem {
+                    Label("Done", systemImage: "circle.badge.checkmark")
+                }
+                .accentColor(.purple)
+            MarkingList(status: .constant("Doing"))
+                .tabItem {
+                    Label("Doing", systemImage: "circle.badge.exclamationmark")
+                }
+                .accentColor(.green)
+            MarkingList(status: .constant("Todo"))
+                .tabItem {
+                    Label("Todo", systemImage: "circle.badge.xmark")
+                }
+                .background(Color.pink)
+        }
+    }
+}
+
+//struct MarkingList: View {
+//    @Binding var status: String
+//    @ObservedObject var apiService = APIService()
+//    
+//    var body: some View {
+//        $status
+//            .onTapGesture {
+//                withAnimation {
+//                    List(apiService.markings) { marking in
+//                        VStack(alignment: .leading) {
+//                            Text(marking.title)
+//                            Text("By: \(marking.by)")
+//                            // Add other properties as needed
+//                        }
+//                    }
+//                    .onAppear {
+//                        self.apiService.fetchData(withStatus: status)
+//                    }
+//                }
+//            }
+//    }
+//}
+//
+//struct StatusTabs: View {
+//    var body: some View {
+//        TabView {
+//            MarkingList(status: "Done")
+//                .badge(1)
+//                .tabItem {
+//                    Label("Received", systemImage: "tray.and.arrow.down.fill")
+//                }
+//            MarkingList(status: "Doing")
+//                .badge(2)
+//                .tabItem {
+//                    Label("Received", systemImage: "tray.and.arrow.down.fill")
+//                }
+//        }
+//    }
+//}
+
+
 class APIService: ObservableObject {
     @Published var markings: [Marking] = []
     
-    func fetchData() {
-        guard let url = URL(string: "https://unifuu.com/api/marking") else {
+    func fetchData(withStatus status: String) {
+        guard var components = URLComponents(string: api(url: "marking")) else {
+            return
+        }
+        components.queryItems = [URLQueryItem(name: "status", value: status)]
+        
+        guard let url = components.url else {
             return
         }
         

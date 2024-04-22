@@ -16,12 +16,12 @@ struct ContentView: View {
             if isAuth {
                 MainView()
             } else {
-                LoginView()
-                    .onAppear {
-                        if let authToken = authToken, !authToken.isEmpty {
-                            checkToken(token: authToken, isAuth: $isAuth)
-                        }
+                LoginView(isAuth: $isAuth)
+                .onAppear {
+                    if let authToken = authToken, !authToken.isEmpty {
+                        checkToken(token: authToken, isAuth: $isAuth)
                     }
+                }
             }
         }
     }
@@ -31,8 +31,7 @@ func checkToken(
     token: String,
     isAuth: Binding<Bool>
 ) {
-    guard let url = URL(string: "http://localhost/api/user/checkToken"
-    ) else { return }
+    guard let url = URL(string: api(url: "user/checkToken")) else { return }
     
     var req = URLRequest(url: url)
     req.httpMethod = "POST"
@@ -54,17 +53,6 @@ func checkToken(
         
         // Decode response JSON
         if let resp = try? JSONDecoder().decode(AuthResp.self, from: data) {
-            // Handle login response
-            //            if resp.is_auth.isEmpty {
-            //                isAuth.wrappedValue = false
-            //            } else {
-            //                let msg = resp.msg
-            //                if msg == "ok" {
-            //                    isAuth.wrappedValue = true
-            //                } else {
-            //                    isAuth.wrappedValue = false
-            //                }
-            //            }
             isAuth.wrappedValue = resp.is_auth
         } else {
             print("Failed to decode response JSON")
@@ -73,6 +61,7 @@ func checkToken(
 }
 
 struct LoginView: View {
+    @Binding var isAuth: Bool
     @State private var username = ""
     @State private var password = ""
     @State private var showAlert = false
@@ -113,8 +102,7 @@ struct LoginView: View {
     }
     
     func login() {
-        guard let url = URL(string: "http://localhost/api/user/checkAuth"
-        ) else { return }
+        guard let url = URL(string: api(url: "user/checkAuth")) else { return }
         
         var req = URLRequest(url: url)
         req.httpMethod = "POST"
@@ -142,6 +130,7 @@ struct LoginView: View {
                 } else {
                     let authToken = response.auth_token
                     UserDefaults.standard.set(authToken, forKey: "auth_token")
+                    isAuth = response.is_auth
                 }
             } else {
                 print("Failed to decode response JSON")
